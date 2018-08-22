@@ -21,6 +21,20 @@ NEWSPIDER_MODULE = 'SteamReleaseScraper.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+FEED_URI = '%(targetHumanTime)s/%(targetHumanTime)s-releases.csv'
+FEED_FORMAT = 'csv'
+COOKIES_DEBUG = False
+
+ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
+FILES_STORE = '%(targetHumanTime)s/'
+# ITEM_PIPELINES = {
+#     'SteamReleaseScraper.pipelines.SteamreleasescraperPipeline': 300
+    
+# }
+
+# FEED_EXPORTERS = {
+#     'csv': 'steejoCSV',
+#}
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
