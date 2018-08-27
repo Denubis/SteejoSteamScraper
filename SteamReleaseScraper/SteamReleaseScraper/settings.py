@@ -25,8 +25,10 @@ FEED_URI = '%(targetHumanTime)s/%(targetHumanTime)s-releases.csv'
 FEED_FORMAT = 'csv'
 COOKIES_DEBUG = False
 
-ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
-FILES_STORE = '%(targetHumanTime)s/'
+ITEM_PIPELINES = {#'scrapy.pipelines.files.FilesPipeline': 1
+	'SteamReleaseScraper.pipelines.MyFilesPipeline': 200
+}
+FILES_STORE = './'
 # ITEM_PIPELINES = {
 #     'SteamReleaseScraper.pipelines.SteamreleasescraperPipeline': 300
     

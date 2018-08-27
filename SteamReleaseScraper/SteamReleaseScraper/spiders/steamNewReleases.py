@@ -143,7 +143,8 @@ class SteamnewreleasesSpider(scrapy.Spider):
 			with open("{}/agecheck.txt".format(self.targetHumanTime), "a") as file:
 				file.write(response.request.url)
 
-		trailer = response.xpath("//div[@data-webm-hd-source]/@data-webm-hd-source").extract()
+		#trailer = response.xpath("//div[@data-webm-hd-source]/@data-webm-hd-source").extract()
+		trailer = response.xpath("//div[@data-webm-source]/@data-webm-source").extract()
 		if trailer:
 			print(trailer)
 			item['file_urls'] = trailer
