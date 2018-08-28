@@ -14,6 +14,8 @@ from tzlocal import get_localzone
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse, parse_qsl
 from SteamReleaseScraper.items import SteamreleasescraperItem
 DAYLEN=24*60*60
+VIDEOFORMAT="mp4-hd" # of "webm-hd", "webm", "mp4-hd", "mp4"
+
 # https://alexwlchan.net/2016/08/dealing-with-query-strings/
 def set_query_field(url, field, value, replace=False):
 	# Parse out the different parts of the URL.
@@ -127,7 +129,8 @@ class SteamnewreleasesSpider(scrapy.Spider):
 			args = urlparse(response.request.url)
 			query = parse_qs(args.query)
 			if "page" in query:
-				page = query['page'] +1
+				logging.debug("On page {}, continuing.".format(query['page'][0]))
+				page = int(query['page'][0]) +1
 			else:
 				page = 2
 			
@@ -144,7 +147,7 @@ class SteamnewreleasesSpider(scrapy.Spider):
 				file.write(response.request.url)
 
 		#trailer = response.xpath("//div[@data-webm-hd-source]/@data-webm-hd-source").extract()
-		trailer = response.xpath("//div[@data-webm-source]/@data-webm-source").extract()
+		trailer = response.xpath("//div[@data-{0}-source]/@data-{0}-source".format(VIDEOFORMAT)).extract()
 		if trailer:
 			print(trailer)
 			item['file_urls'] = trailer
