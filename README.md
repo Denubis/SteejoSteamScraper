@@ -9,3 +9,10 @@ Steejo: What I ideally would like
 ```
 
 Main link: `https://store.steampowered.com/news/posts/?feed=steam_release&enddate=1534654564`
+
+
+To invoke for releases 2 days ago:
+
+~~~
+scrapy crawl steamNewReleases -a targetdate="2 days ago"
+~~~
